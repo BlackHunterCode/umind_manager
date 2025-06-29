@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - umind_manager</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/umind_manager.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3 py-2 shadow-sm">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img src="/images/umind.png" alt="Umind" width="30" class="me-2">
+                    <span class="text-light fw-semibold fs-5">@ViewData["Title"]</span>
+                </div>
+                <form class="d-none d-md-flex mx-auto w-50">
+                    <input class="form-control form-control-sm bg-dark text-light border-secondary"
+                           type="search" placeholder="Write a description" aria-label="Search">
+                </form>
+                <div class="d-flex align-items-center">
+                    <img src="/images/user-avatar.png" alt="Avatar" class="rounded-circle me-2" width="32" height="32">
+                    <span class="text-light">Alexandre</span>
+                    <i class="bi bi-caret-down-fill text-light ms-1"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - umind_manager - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -4,45 +4,75 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - umind_manager</title>
-    <script type="importmap"></script>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <!-- yuilib CDN CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/BlackHunterCode/uilib-yui-cdn@develop/yuilib.css" />
+
+    <!-- Site CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/umind_manager.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="bg-dark text-light">
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3 py-2 shadow-sm">
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img src="/images/umind.png" alt="Umind" width="30" class="me-2">
+                    <img src="~/images/umind.png" alt="Umind" width="30" class="me-2">
                     <span class="text-light fw-semibold fs-5">@ViewData["Title"]</span>
                 </div>
-                <form class="d-none d-md-flex mx-auto w-50">
-                    <input class="form-control form-control-sm bg-dark text-light border-secondary"
+
+                <form class="d-none d-md-flex mx-auto w-50 me-3">
+                    <input class="y-input"
                            type="search" placeholder="Write a description" aria-label="Search">
                 </form>
+
+                <!-- y-select da sua lib no header -->
+                <div class="y-select-wrapper me-3" style="min-width: 180px;">
+                    <div class="y-select" tabindex="0">
+                        <span class="y-selected">Tema</span>
+                    </div>
+                    <div class="y-option-container">
+                        <span class="y-option">Escuro</span>
+                        <span class="y-option">Claro</span>
+                        <span class="y-option">Automático</span>
+                    </div>
+                </div>
+
                 <div class="d-flex align-items-center">
-                    <img src="/images/user-avatar.png" alt="Avatar" class="rounded-circle me-2" width="32" height="32">
+                    <img src="~/images/user-avatar.png" alt="Avatar" class="rounded-circle me-2" width="32" height="32">
                     <span class="text-light">Alexandre</span>
                     <i class="bi bi-caret-down-fill text-light ms-1"></i>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted mt-5">
         <div class="container">
             &copy; 2025 - umind_manager - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- yuilib CDN JS -->
+    <script src="https://cdn.jsdelivr.net/gh/BlackHunterCode/uilib-yui-cdn@develop/tools/yuilib.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.14.36301.6 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "umind_manager", "umind_manager\umind_manager.csproj", "{96C59EAC-EB58-47D7-B15E-8D79BF5E157D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "umind_manager", "umind_manager\umind_manager.csproj", "{5C67548B-9B31-4873-89C2-BF69FDD4A67A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{96C59EAC-EB58-47D7-B15E-8D79BF5E157D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96C59EAC-EB58-47D7-B15E-8D79BF5E157D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96C59EAC-EB58-47D7-B15E-8D79BF5E157D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96C59EAC-EB58-47D7-B15E-8D79BF5E157D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C67548B-9B31-4873-89C2-BF69FDD4A67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C67548B-9B31-4873-89C2-BF69FDD4A67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C67548B-9B31-4873-89C2-BF69FDD4A67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C67548B-9B31-4873-89C2-BF69FDD4A67A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3A8DED27-1741-465D-9675-8BEF939E1B32}
+		SolutionGuid = {FD57F030-5541-4865-A98C-6E82C5A45657}
 	EndGlobalSection
 EndGlobal

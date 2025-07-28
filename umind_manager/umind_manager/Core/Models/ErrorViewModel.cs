@@ -1,4 +1,4 @@
-namespace umind_manager.Models
+namespace umind_manager.Core.Models
 {
     public class ErrorViewModel
     {

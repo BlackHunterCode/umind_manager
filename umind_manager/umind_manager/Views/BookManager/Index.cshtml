@@ -1,0 +1,267 @@
+﻿@{
+    ViewData["Title"] = "Gerenciador de Livros";
+}
+@model IEnumerable<umind_manager.Core.Entities.Books>
+
+<style>
+    .book-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 14px;
+        color: #fff;
+        background-color: #1c1e21;
+        border: 1px solid #606770;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+        .book-table th, .book-table td {
+            text-align: left;
+            padding: 12px 16px;
+            vertical-align: middle;
+            border-bottom: 1px solid #606770;
+        }
+
+        .book-table th {
+            background-color: #1c1e21;
+            color: #606770;
+            font-weight: 600;
+        }
+
+        .book-table tbody tr:hover {
+            background-color: #1c1e21;
+            cursor: pointer;
+        }
+
+    .book-toggle {
+        display: inline-block;
+        position: relative;
+        width: 36px;
+        height: 20px;
+    }
+
+        .book-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .book-toggle .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 20px;
+            transition: 0.4s;
+        }
+
+            .book-toggle .slider:before {
+                content: "";
+                position: absolute;
+                height: 14px;
+                width: 14px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: 0.4s;
+                border-radius: 50%;
+            }
+
+        .book-toggle input:checked + .slider {
+            background-color: #1877f2;
+        }
+
+            .book-toggle input:checked + .slider:before {
+                transform: translateX(16px);
+            }
+</style>
+
+<form style="margin-top: 20px" asp-controller="BookManager" asp-action="CriarResumo" method="post" enctype="multipart/form-data">
+    <div>
+        <div style="display: flex; gap: 15px">
+            <button type="button" class="y-btn" onclick="openModal('modal-test')"><b><i style="font-size: large">+</i>Registrar Livro</b></button>
+            <button type="button" class="y-btn" onclick="openModal('modal-editar')"><b>Editar</b></button>
+            <button type="button" class="y-btn" onclick="openModal('modal-excluir')"><b>Excluir</b></button>
+        </div>
+        <div class="y-modal-backdrop" id="modal-editar">
+            <div class="y-modal">
+                <header>
+                    Editar de Livro
+                    <button type="button" class="y-modal-close-btn" onclick="closeModal('modal-test')">×</button>
+                </header>
+                <hr>
+                <div class="y-modal-content" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="input-change">
+                        <label>Título</label>
+                        <input type="text" name="titulo" placeholder="Digite o nome do livro" class="y-input">
+                    </div>
+                    <div>
+                        <label>Livro em PDF</label>
+                        <input type="file" name="livroPdf" class="y-input" />
+                    </div>
+                    <div>
+                        <label>Capa</label>
+                        <input type="file" name="capa" class="y-input" />
+                    </div>
+                    <div>
+                        <label>Sumário</label>
+                        <textarea name="sumario" placeholder="Digite aqui..." class="y-input"></textarea>
+                    </div>
+                    <footer>
+                        <button class="y-btn">Editar Livro</button>
+                    </footer>
+                </div>
+            </div>
+            <div class="y-modal-backdrop" id="modal-excluir">
+                <div class="y-modal">
+                    <header>
+                        Ecluir do Livro
+                        <button type="button" class="y-modal-close-btn" onclick="closeModal('modal-detalhes')">×</button>
+                    </header>
+                    <hr />
+                    <div class="y-modal-content" style="display: flex; flex-direction: column; gap: 1rem; align-items: center">
+                        Você tem certeza que quer excluir o livro
+                        <button class="y-btn">Confirmar</button>
+                        <button onclick="closeModal('modal-detalhes')" class="y-btn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="y-modal-backdrop" id="modal-test">
+                <div class="y-modal">
+                    <header>
+                        Registro de Livro
+                        <button type="button" class="y-modal-close-btn" onclick="closeModal('modal-test')">×</button>
+                    </header>
+                    <hr>
+                    <div class="y-modal-content" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div class="input-change">
+                            <label>Título</label>
+                            <input type="text" name="titulo" placeholder="Digite o nome do livro" class="y-input">
+                        </div>
+                        <div>
+                            <label>Livro em PDF</label>
+                            <input type="file" name="livroPdf" class="y-input" />
+                        </div>
+                        <div>
+                            <label>Capa</label>
+                            <input type="file" name="capa" class="y-input" />
+                        </div>
+                        <div>
+                            <label>Sumário</label>
+                            <textarea name="sumario" placeholder="Digite aqui..." class="y-input"></textarea>
+                        </div>
+                    </div>
+                    <hr>
+                    <footer>
+                        <button type="submit" class="y-btn">Criar Resumo</button>
+                    </footer>
+                </div>
+            </div>
+        </div>
+</form>
+<div style="margin-top: 1rem">
+    <table class="book-table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" /></th>
+                <th>Ativo</th>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Missões</th>
+                <th>Ver Detalhe</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var livro in Model)
+                {
+                    <tr>
+                        <input type="checkbox" name="selectedBookId" value="@livro.Id" />
+                        <td>
+                            <label class="book-toggle">
+                                <input type="checkbox" @(livro.Active ? "checked" : "") disabled />
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                        <td>@livro.Title</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(livro.PathCape))
+                            {
+                                <img src="~/Uploads/@livro.PathCape" alt="Capa" width="40" height="60" />
+                            }
+                            else
+                            {
+                                <span>Sem Capa</span>
+                            }
+                        </td>
+                        <td><button class="y-btn" onclick="openModal('modal-missoes')">Missões</button></td>
+                        <td><button class="y-btn" onclick="openModal('modal-detalhes')">Ver</button></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" style="text-align:center">Nenhum livro cadastrado.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="y-modal-backdrop" id="modal-missoes">
+    <div class="y-modal">
+        <header>
+            Missões do Livro
+            <button type="button" class="y-modal-close-btn" onclick="closeModal('modal-missoes')">×</button>
+        </header>
+        <hr />
+        <div class="y-modal-content">
+            <div class="input-change">
+                <label>Título</label>
+                <textarea name="sumario" placeholder="Digite aqui..." class="y-input"></textarea>
+            </div>
+            <div>
+                <label>Descrição</label>
+                <input type="file" name="livroPdf" class="y-input" />
+            </div>
+            <div>
+                <label>Desempenho da Missão</label>
+                <div class="y-select-wrapper">
+                    <input type="hidden" name="seletor" value="">
+
+                    <div class="y-select" tabindex="0">
+                        <span class="y-selected">Escolha uma das opções</span>
+                    </div>
+
+                    <div class="y-option-container">
+                        <span class="y-option" data-value="1">Alto</span>
+                        <span class="y-option" data-value="2">Médio</span>
+                        <span class="y-option" data-value="3">Baixo</span>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <button type="submit" class="y-btn">Criar Missão</button>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<div class="y-modal-backdrop" id="modal-detalhes">
+    <div class="y-modal">
+        <header>
+            Detalhes do Livro
+            <button type="button" class="y-modal-close-btn" onclick="closeModal('modal-detalhes')">×</button>
+        </header>
+        <hr />
+        <div class="y-modal-content">
+        </div>
+    </div>
+</div>

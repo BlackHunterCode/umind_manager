@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using umind_manager.Models;
+using umind_manager.Core.Models;
 
 namespace umind_manager.Controllers
 {
@@ -14,11 +14,6 @@ namespace umind_manager.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

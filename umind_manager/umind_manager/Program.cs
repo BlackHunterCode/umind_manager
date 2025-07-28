@@ -1,15 +1,16 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using umind_manager.Configurations;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllersWithViews();
 
-// ✅ Adiciona serviços para Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDataDependencies();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -17,7 +18,6 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    // ✅ Habilita Swagger apenas em desenvolvimento
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -29,8 +29,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Mapeia tanto APIs quanto Controllers com Views
-app.MapControllers(); // ✅ Necessário para APIs funcionarem
+app.MapControllers();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
